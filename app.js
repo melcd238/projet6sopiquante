@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const dotenv = require('dotenv').config();
+const mongoSanitize = require('express-mongo-sanitize');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json()); 
 app.use(Helmet());
+app.use(mongoSanitize());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

@@ -1,7 +1,9 @@
 const express = require('express');
+const Helmet = require('helmet');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+
 const app = express();
 
 const userRoutes = require('./routes/user'); 
@@ -25,6 +27,7 @@ app.use((req, res, next) => {
   });
 
 app.use(bodyParser.json()); 
+app.use(Helmet());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

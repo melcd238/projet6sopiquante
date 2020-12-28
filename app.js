@@ -3,13 +3,16 @@ const Helmet = require('helmet');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const dotenv = require('dotenv').config();
 
 const app = express();
 
 const userRoutes = require('./routes/user'); 
 const saucesRoutes = require('./routes/sauce') ;
 
-mongoose.connect('mongodb+srv://mel:CeDMeL0803@cluster0.nlv2b.mongodb.net/p6piquante?retryWrites=true&w=majority',
+const bddMongoose = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.nlv2b.mongodb.net/p6piquante?retryWrites=true&w=majority`
+
+mongoose.connect(bddMongoose,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB Atlas réussie !'))
